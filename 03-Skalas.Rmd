@@ -1,0 +1,18 @@
+# Skalas
+
+## scale_colour_...()
+
+## scale_fill_...()
+
+## scale_alpha_...()
+
+## scale_linetype_...()
+
+## scale_shape_...()
+
+## scale_size_...()
+
+## scale_x_discrete() un scale_y_discrete()
+
+## scale_x_continuous() un scale_y_continuous()
+

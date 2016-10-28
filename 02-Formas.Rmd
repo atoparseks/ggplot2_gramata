@@ -1,0 +1,59 @@
+# Formas
+
+## geom_point()
+
+Ar `geom_point()` ir iespējams veidot izkliedes attēlus (scatterplot) (\@ref(fig:point1) attēls).
+
+```{r point1,fig.cap="Izkliedes attēla piemērs"}
+library(ggplot2)
+ggplot(iris,aes(Petal.Width,Petal.Length))+geom_point()
+```
+
+## geom_bar()
+
+
+## geom_line()
+
+
+## geom_path()
+
+
+## geom_boxplot()
+
+Box-plot attēlu veidošanai izmanto `geom_boxplot()`. Šim attēla veida x vērtībām ir jābūt kvalitatīviem datiem, vai arī skaitliskiem datiem, kas pārvērsti par faktoru. y vērtībām obligāti ir jābūt skaitliskām.
+
+```{r boxpl1,fig.cap="boxplot attēla piemērs"}
+ggplot(iris,aes(Species,Petal.Width))+geom_boxplot()
+```
+
+
+## geom_count()
+
+
+## geom_crossbar(), geom_errobar(), geom_ linerange() un geom_pointrange()
+
+
+## geom_dotplo()
+
+
+## geom_abline()
+
+
+## geom_density()
+
+
+## geom_jitter()
+
+
+## geom_polygon()
+
+
+## geom_ribbon()
+
+
+## geom_smooth()
+
+
+## geom_violin()
+
+

@@ -1,0 +1,16 @@
+--- 
+title: "ggplot2 grafiskā sistēma"
+author: "Didzis Elferts"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Šī grāmata ir par vienu no programma R grafiskajām sistēmām - ggplot2."
+---
+
+# Pamatojums
+
+Kāpēc rakstu šo grāmatu?

@@ -1,0 +1,5 @@
+# Attēlu sadalīšana
+
+## facet_wrap()
+
+## facet_grid()
