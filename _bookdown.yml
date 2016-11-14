@@ -1,2 +1,6 @@
 book_filename: "ggplot2_gramata"
-chapter_name: !expr function(i) paste0(i,". nodaļa.")
+language:
+  label:
+    fig: 'Attēls '
+  ui:
+    chapter_name: 'Nodaļa '
