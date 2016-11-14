@@ -1,15 +1,88 @@
 # Formas
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.height = 4)
+```
+
 ## geom_point()
 
-Ar `geom_point()` ir iespējams veidot izkliedes attēlus (scatterplot) (\@ref(fig:point1) attēls).
+Ar `geom_point()` ir iespējams veidot izkliedes attēlus (scatterplot) (\@ref(fig:point1) attēls). 
 
 ```{r point1,fig.cap="Izkliedes attēla piemērs"}
 library(ggplot2)
-ggplot(iris,aes(Petal.Width,Petal.Length))+geom_point()
+ggplot(CO2,aes(conc,uptake))+geom_point()
+```
+
+
+Punktiem ir iespējams mainīt krāsu (`color=`), formu (`shape=`), lielumu (`size=`) un caurspīdīgumu (`alpha=`). Mainot šos parametrus ir jānolemj pēc kādiem principiem tas notiks - parametrs būs vienāds visiem punktiem, vai arī tas mainīsies atkarībā no kāda cita mainīgā datos.
+
+Ja parametram ir jābūt vienādam visiem punktiem, tad tas ir jānorāda ārpus funkcijas `aes()` pašā `geom_...()` vai `ggplot()` funkcijā. Toties, ja parametram ir jāmainās atkarībā no mainīgā, tad tas obligāti jāliek funkcijā `aes()`.
+
+Šajā piemērā punktu krāsa un lielums ir mainīts visiem punktiem uzreiz (\@ref(fig:point2) attēls). Krāsu var norādīt kā tās anglisko nosaukumu (tos var apskatīt ar funkciju `colors()`) vai arī izmantojot heksadecimālo kodu.
+
+```{r point2,fig.cap="Izkliedes attēls, kurā krāsa un lielums visiem punktiem vienāds"}
+ggplot(CO2,aes(conc,uptake))+geom_point(color="green",size=2)
+```
+
+Ja arguments `color=` atrodas `aes()` iekavās un tas ir atkarīgs no kāda mainīgā, tad punktu krāsa mainīsies atbilstoši vērtībām, kā arī parādīsies atbilstošā leģenda. Krāsu maiņa un leģendas veids ir atkarīgs no tā, kāda veida mainīgais ir izmantots. Ja krāsa ir atkarīga no kategorijas mainīgā, tad krāsas mainīsies diskrēti (\@ref(fig:point3) attēls).
+
+```{r point3,fig.cap="Izkliedes attēls, kurā krāsa ir atkarīga no kategorijas mainīgā"}
+ggplot(CO2,aes(conc,uptake,color=Type))+geom_point()
+```
+
+Toties norādāt kā mainīgo tādu, kas ir skaitlisks, krāsa mainīsies kā gradients (\@ref(fig:point4) attēls).
+
+```{r point4,fig.cap="Izkliedes attēls, kurā krāsa ir atkarīga no skaitliska mainīgā"}
+ggplot(CO2,aes(conc,uptake,color=uptake))+geom_point()
+```
+
+Punktu forma var mainīties tikai atkarībā no kategorijas mainīgā (\@ref(fig:point5) attēls).
+
+```{r point5,fig.cap="Izkliedes attēls, kurā forma ir atkarīga no kategorijas mainīgā"}
+ggplot(CO2,aes(conc,uptake,shape=Type))+geom_point()
+```
+
+Ir iespējams panākt arī, ka, piemēram, punktu forma mainās atkarībā no viena mainīgā, bet krāsa atkarībā no cita mainīgā. Šajā gadījumā parādīsies arī divas leģendas (\@ref(fig:point6) attēls).
+
+```{r point6,fig.cap="Izkliedes attēls, kurā forma un krāsa ir atkarīga no dažādiem kategorijas mainīgajiem"}
+ggplot(CO2,aes(conc,uptake,shape=Type,color=Treatment))+geom_point()
 ```
 
 ## geom_bar()
+
+Stabiņu attēlus veido ar funkciju `geom_bar()`. Šai funkcijai `aes()` ir jānorāda tikai x vērtības (diskrētas), jo novērojumu skaits katrā klasē tiek saskaitīts automātiski (`geom_bar()` balstās un `stat_count()`) (\@ref(fig:bar1) attēls).
+
+```{r bar1, fig.cap="Stabiņu attēla piemērs"}
+ggplot(mpg,aes(drv))+geom_bar()
+```
+Stabiņu attēlā katram stabiņa ir iespējams mainīt krāsu (`color=`) un aizpildījumu (`fill=`). Arguments `color=` nosaka līnijas krāsu apkārt katram no stabiņiem, bet `fill=` nosaka paša stabiņa krāsu (aizpildījumu) (\@ref(fig:bar2) attēls).
+
+```{r bar2, fig.cap="Stabiņu attēls, kurā stabiņu krāsa un aizpildījums visiem vienāds"}
+ggplot(mpg,aes(drv))+geom_bar(fill="white",color="red")
+```
+
+Padarot aizpildījumu atkarīgu no kāda kategrijas mainīgā, izveidojas stabiņu attēls, kur pie katras x mainīgā kategorijas, stabiņš ir sadalītas pa daļām balstoties uz jauno mainīgo (\@ref(fig:bar3) attēls).
+
+```{r bar3, fig.cap="Stabiņu attēls, kurā stabiņu aizpildījums atkarīgs no mainīgā"}
+ggplot(mpg,aes(drv,fill=factor(cyl)))+geom_bar()
+```
+
+Pieliekot argumentu `position="dodge"`, var panākt, ka pie katras x kategorijas stabiņi ir viens otram blakus, nevis viens virs otra (\@ref(fig:bar4) attēls).
+
+```{r bar4, fig.cap="Stabiņu attēls, kurā stabiņu aizpildījums atkarīgs no mainīgā"}
+ggplot(mpg,aes(drv,fill=factor(cyl)))+geom_bar(position="dodge")
+```
+
+
+## geom_col()
+
+Gadījumos, kad dati ir jau apkopoti un ir nepieciešams izveidot stabiņu attēlu, tad labāk izmantot `geom_col()`, kam jānorāda gan x vērtības, gan arī atbilstošās y vērtības (skaiti) (\@ref(fig:col1) attēls).
+
+```{r col1,fig.cap="Stabiņu attēls, kurā skaiti jau doti tabulā"}
+dati <- data.frame(Dzimums=c("S","V"),Skaits=c(23,45))
+dati
+ggplot(dati,aes(Dzimums,Skaits))+geom_col()
+```
 
 
 ## geom_line()
@@ -20,12 +93,17 @@ ggplot(iris,aes(Petal.Width,Petal.Length))+geom_point()
 
 ## geom_boxplot()
 
-Box-plot attēlu veidošanai izmanto `geom_boxplot()`. Šim attēla veida x vērtībām ir jābūt kvalitatīviem datiem, vai arī skaitliskiem datiem, kas pārvērsti par faktoru. y vērtībām obligāti ir jābūt skaitliskām.
+Vērtībamplitūdas diagrammas veidošanai izmanto `geom_boxplot()`. Šim attēla veida x vērtībām ir jābūt kvalitatīviem datiem, vai arī skaitliskiem datiem, kas pārvērsti par faktoru. y vērtībām obligāti ir jābūt skaitliskām.
 
 ```{r boxpl1,fig.cap="boxplot attēla piemērs"}
-ggplot(iris,aes(Species,Petal.Width))+geom_boxplot()
+ggplot(CO2,aes(Type,uptake))+geom_boxplot()
 ```
 
+Ja arguments `fill=` atrodas funkcijas `aes()` iekavās un tas ir atkarīgs no kāda mainīgā, tad pie katras atbilstošās x vērtības, vērtībamplitūdas diagramma tiek sadalīta tik daļās, cik līmeņi ir papildus mainīgajam, kā arī parādās atbilstošā leģenda ar izmantotajām aizpildījuma krāsām.
+
+```{r}
+ggplot(CO2,aes(Type,uptake,fill=Treatment))+geom_boxplot()
+```
 
 ## geom_count()
 
