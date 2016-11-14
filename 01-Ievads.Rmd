@@ -1,3 +1,19 @@
 # Ievads
 
-Šeit būs teksts
+## Dati 
+
+`ggplot2` sistēmas iespēju apskatīšanai izmantoti R iekļautie datu objekti CO2 un mpg (iekļauts paketē `ggplot2`). CO2 ir eksperimenta rezultāti par sala tolerenaci sugai *Echinochloa crus-galli*. Datu objektā ir piecas kolonnas: (1) Plant - auga identifikators; (2) Type - auga izcelsmes vieta; (3) Treatment - eksperimenta apstākļi (divas kategorijas); (4) conc - vides CO2 koncentrācija; (5) uptake - uzņemtā CO2 apjoms.
+
+```{r}
+data(CO2)
+head(CO2)
+```
+
+Objektā mpg ir informācija par degvielas patēriņu, kas pārādīta 11 kolonnās: (1) manufacter - ražotājs; (2) model - automašīnas modelis; (3) displ - dzinēja tilpums; (4) year - ražošanas gads; (5) cyl - cilindru skaits; (6) trans - transmisijas tips; (7) drv - velkošie riteņi; (8) cty - jūdžu skaits/gallons pilsētā; (9) hwy - ūdžu skaits/gallons uz šosejas; (10) fl - degvielas veids; (11) class - automašīnas veids.
+
+```{r}
+library(ggplot2)
+data(mpg)
+head(mpg)
+```
+
