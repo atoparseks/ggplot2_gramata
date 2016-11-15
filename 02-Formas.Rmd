@@ -4,6 +4,8 @@
 knitr::opts_chunk$set(fig.height = 4)
 ```
 
+ggplot2 sistēmā ir iespējams vienus un tos pašus datus attēlot dažādos veidos, izvēloties atbilstošo datu attēlošanas formu jeb `geom_...()`. Vairumā gadījumu ir jānorāda x un y vērtības, bet atsevišķos gadījumos ir nepieciešami arī papildus mainīgie, vai arī nepieciešamas tikai x vērtības (piemēram, histogrammai).
+
 ## geom_point()
 
 Ar `geom_point()` ir iespējams veidot izkliedes attēlus (scatterplot) (\@ref(fig:point1) attēls). 
@@ -85,53 +87,76 @@ ggplot(dati,aes(Dzimums,Skaits))+geom_col()
 ```
 
 
-## geom_line()
+<!-- ## geom_line() -->
 
 
-## geom_path()
+<!-- ## geom_path() -->
 
 
 ## geom_boxplot()
 
-Vērtībamplitūdas diagrammas veidošanai izmanto `geom_boxplot()`. Šim attēla veida x vērtībām ir jābūt kvalitatīviem datiem, vai arī skaitliskiem datiem, kas pārvērsti par faktoru. y vērtībām obligāti ir jābūt skaitliskām.
+Vērtībamplitūdas diagrammas veidošanai izmanto `geom_boxplot()`. Šim attēla veida x vērtībām ir jābūt kvalitatīviem datiem, vai arī skaitliskiem datiem, kas pārvērsti par faktoru. y vērtībām obligāti ir jābūt skaitliskām (\@ref(fig:boxpl1) attēls).
 
-```{r boxpl1,fig.cap="boxplot attēla piemērs"}
+```{r boxpl1,fig.cap="Vērtībamplitūdas diagrammas piemērs"}
 ggplot(CO2,aes(Type,uptake))+geom_boxplot()
 ```
 
-Ja arguments `fill=` atrodas funkcijas `aes()` iekavās un tas ir atkarīgs no kāda mainīgā, tad pie katras atbilstošās x vērtības, vērtībamplitūdas diagramma tiek sadalīta tik daļās, cik līmeņi ir papildus mainīgajam, kā arī parādās atbilstošā leģenda ar izmantotajām aizpildījuma krāsām.
+Līdzīgi kā stabiņu attēlam vērtībamplitūdas diagrammā var mainīt līniju un punktu krāsu (`color=`) vai arī "kastītes" aizpildījumu (`fill=`) (\@ref(fig:boxpl2) attēls).
 
-```{r}
+```{r boxpl2,fig.cap="Vērtībamplitūdas diagramma ar izmainītu līniju un kastītes krāsu"}
+ggplot(CO2,aes(Type,uptake))+geom_boxplot(color="green",fill="red")
+```
+
+Izlēcēju (neraksturīgo vērtību) punktu krāsu, formu un izmēru var mainīt arī atsevišķi, izmantojot argumentus `outlier.color=`, `outlier.shape=` un `outlier.size=` (\@ref(fig:boxpl3) attēls).
+
+```{r boxpl3,fig.cap="Vērtībamplitūdas diagramma ar izmainītu izlēcēju krāsu, formu un izmēru"}
+ggplot(CO2,aes(Type,uptake))+geom_boxplot(outlier.color = "red",outlier.shape = 13,outlier.size = 3)
+```
+
+Ja arguments `fill=` atrodas funkcijas `aes()` iekavās un tas ir atkarīgs no kāda mainīgā, tad pie katras atbilstošās x vērtības, vērtībamplitūdas diagramma tiek sadalīta tik daļās, cik līmeņi ir papildus mainīgajam, kā arī parādās atbilstošā leģenda ar izmantotajām aizpildījuma krāsām  (\@ref(fig:boxpl4) attēls).
+
+```{r boxpl4,fig.cap="Vērtībamplitūdas diagramma, kurā katram faktora līmenim diagramma sadalīta daļās"}
 ggplot(CO2,aes(Type,uptake,fill=Treatment))+geom_boxplot()
 ```
 
 ## geom_count()
 
+Gadījumos, kad nepieciešams attēlot izkliedes diagrammu, bet ir vērojama punktu pārklāšanās (pie vienādām x un y vērtībām ir vairāki novērojumi), var izmantot `geom_count()`, kas parāda cik daudz novērojumu ir konkrētajām x un y vērtībām (\@ref(fig:count1) attēls).
 
-## geom_crossbar(), geom_errobar(), geom_ linerange() un geom_pointrange()
+```{r count1, fig.cap="Izkliedes diagramma, kur punktu lielums atkarīgs no novērojumu skaita"}
+ggplot(mpg, aes(cty, hwy)) + geom_count()
+```
 
+Ja `aes()` funkcijā norāda argumentu size=..prop.., tad punktu lielums ir parāda proporciju nevis skaitu  (\@ref(fig:count2) attēls).
 
-## geom_dotplo()
+```{r count2, fig.cap="Izkliedes diagramma, kur punktu lielums atbilst novērojumu proporcijai"}
+ggplot(mpg, aes(cty, hwy)) + geom_count(aes(size=..prop..))
+```
 
-
-## geom_abline()
-
-
-## geom_density()
-
-
-## geom_jitter()
-
-
-## geom_polygon()
+<!-- ## geom_crossbar(), geom_errobar(), geom_ linerange() un geom_pointrange() -->
 
 
-## geom_ribbon()
+<!-- ## geom_dotplo() -->
 
 
-## geom_smooth()
+<!-- ## geom_abline() -->
 
 
-## geom_violin()
+<!-- ## geom_density() -->
+
+
+<!-- ## geom_jitter() -->
+
+
+<!-- ## geom_polygon() -->
+
+
+<!-- ## geom_ribbon() -->
+
+
+<!-- ## geom_smooth() -->
+
+
+<!-- ## geom_violin() -->
 
 
