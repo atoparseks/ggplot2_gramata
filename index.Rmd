@@ -13,7 +13,7 @@ description: "Šī grāmata ir par vienu no programmas R grafiskajām sistēmām
 
 # Pamatojums
 
-Programmā R ir iespējams veidot attēlus izmantojot dažādas attēlu veidošanas sistēmas, no kurām viena ir ggplot2 [@ggplot2] . Šīs sistēmas pamatā ir attēlu veidošanas gramatika.
+Programmā R ir iespējams veidot attēlus izmantojot dažādas attēlu veidošanas sistēmas, no kurām viena ir ggplot2 (@ggplot2) . Šīs sistēmas pamatā ir attēlu veidošanas gramatika.
 
 
 ![Creative Commons License](images/by-nc-sa.png)
