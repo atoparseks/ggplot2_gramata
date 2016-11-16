@@ -87,10 +87,34 @@ ggplot(dati,aes(Dzimums,Skaits))+geom_col()
 ```
 
 
-<!-- ## geom_line() -->
+## geom_line()
+
+Datu punktu savienošanai ar līniju var izmantot `geom_line()`, kas savieno punktus no mazākās x vērtības līdz lielākajai x vērtībai (\@ref(fig:line1) attēls).
+
+```{r line1,fig.cap="Līniju diagrammas piemērs"}
+ggplot(mpg,aes(cty,hwy)) + geom_line()
+```
+
+Līnijām ir iespējams mainīt tās platumu (`size=`), krāsu (`color=`) un līnijas veidu (`linetype=`) (\@ref(fig:line2) attēls).
+
+```{r line2,fig.cap="Līnija ar izmainītiem parametriem"}
+ggplot(mpg,aes(cty,hwy)) + geom_line(color="red",size=1.5,linetype=2)
+```
+
+Ja kāds no līnijas parametriem ir atkarīgs no diskrēta trešā mainīgā, tad parādīsies tik daudz līnijas, cik mainīgajam ir līmeņi (\@ref(fig:line3) attēls).
 
 
-<!-- ## geom_path() -->
+```{r line3,fig.cap="Līnija, kuras krāsa atkarīga no mainīgā"}
+ggplot(mpg,aes(cty,hwy,color=drv)) + geom_line()
+```
+
+## geom_path()
+
+Līniju diagrammai līdzīgs ir arī `geom_path()`, bet šajā gadījumā punkti tiek savienoti tādā secībā, kādā tie parādās datu tabulā (\@ref(fig:path1) attēls). `geom_path()` ir īpaši noderīgs gadījumos, ja jāsavieno x un y koordinātes pārvietošanās ceļam.
+
+```{r path1,fig.cap="Punkti, kas savienoti ar līniju to izvietojuma secībā"}
+ggplot(mpg,aes(cty,hwy)) + geom_path()
+```
 
 
 ## geom_boxplot()
@@ -133,10 +157,35 @@ Ja `aes()` funkcijā norāda argumentu size=..prop.., tad punktu lielums ir par�
 ggplot(mpg, aes(cty, hwy)) + geom_count(aes(size=..prop..))
 ```
 
+
+## geom_histogram()
+
+Histogrammas veidošanai izmanto `geom_histogram()`, kam ir nepieciešamas tikai x vērtības. Pēc noklusējuma dati tiek dalīti trīs klasēs  (\@ref(fig:hist1) attēls).
+
+```{r hist1,fig.cap="Histogrammas piemērs"}
+ggplot(CO2,aes(uptake)) + geom_histogram()
+```
+
+Ar argumentu `binwidth=` ir iespējams mainīt dalījuma klases lielumu, tādēji mainot klašu skaitu un histogrammas izskatu  (\@ref(fig:hist2) attēls). Var arī norādīt vēlamo klašu skaitu ar argumenti `bins=`.
+
+```{r hist2,fig.cap="Histogrammas ar mainītu klases lielumu"}
+ggplot(CO2,aes(uptake)) + geom_histogram(binwidth = 10)
+```
+Tā kā histogrammā parādās stabiņi, tad tiem ir iespējams mainīt gan līnijas krāsu (`color=`), gan arī aizpildījumu (`fill=`) (\@ref(fig:hist3) attēls).
+
+```{r hist3,fig.cap="Histogrammas ar mainītu izskatu"}
+ggplot(CO2,aes(uptake)) + geom_histogram(color="green",fill="white")
+```
+Norādot, ka aizpildījums ir atkarīgs no mainīgā, izveidosies histogramma, kurā katrs stabiņš sadalīts daļās atbilstoši novērojumu skaitam katrā no līmeņiem (\@ref(fig:hist4) attēls).
+
+```{r hist4,fig.cap="Histogrammas, kur aizpildījums atkarīgs no mainīgā"}
+ggplot(CO2,aes(uptake,fill=Type)) + geom_histogram(binwidth = 5)
+```
+
 <!-- ## geom_crossbar(), geom_errobar(), geom_ linerange() un geom_pointrange() -->
 
 
-<!-- ## geom_dotplo() -->
+<!-- ## geom_dotplot() -->
 
 
 <!-- ## geom_abline() -->
@@ -145,8 +194,26 @@ ggplot(mpg, aes(cty, hwy)) + geom_count(aes(size=..prop..))
 <!-- ## geom_density() -->
 
 
-<!-- ## geom_jitter() -->
+## geom_jitter()
 
+Gadījumos, kad nepieciešams izveidot izkliedes (punktu) diagrammu, bet vērojam vērtību pārklāšanās (daudz identisku vērtību), var izmantot `geom_jitter()`, kur punktiem tiek veikta neliela nobīde x vai y (vai abu) ass virzienā, lai novērstu pārklāšanos. Šādu attēlošanas veidu sevišķi ērti izmantot, ja x vērtības ir kategorijas mainīgais, jo tad izkliede notiek tikai x ass virzienā, bet y ass virzienā redzamas reālās vērtības  (\@ref(fig:jit1) attēls).
+
+```{r jit1, fig.cap="Izkliedes diagramma, kurā x virzienā nejauši mainīts punktu izvietojums"}
+ggplot(CO2,aes(Type,uptake))+geom_jitter()
+```
+
+`geom_jitter()` ir labi izmantot kombinācijā ar `geom_boxplot()`, jo tādējādi gan parādās reālās vērtības, gan arī vērtību apkopojums (\@ref(fig:jit2) attēls).
+
+```{r jit2, fig.cap="Izkliedes diagrammas un vērtībamplitūdas diagrammas kombinācija"}
+ggplot(CO2,aes(Type,uptake))+geom_boxplot()+geom_jitter()
+```
+
+`geom_jitter()` un `geom_boxplot()` var kombinēt arī gadījumos, kad vērtībamplitūdas diagramma ir sadalīta atbilsotīs trešā mainīgā līmeņiem, bet šajā gadījumā papildus ir jānorāda arguments `position=position_jitterdodge()`, lai punktu izvietojums atbilstu reālajam vērtību sadalījumam pa līmeņiem (\@ref(fig:jit3) attēls).
+
+```{r jit3,fig.cap="Izkliedes diagrammas un vērtībamplitūdas diagrammas kombinācija gadījumā, kad iesaistīts trešais mainīgais dalījuma līmeņiem"}
+ggplot(CO2,aes(Type,uptake,fill=Treatment))+geom_boxplot()+
+      geom_jitter(position=position_jitterdodge())
+```
 
 <!-- ## geom_polygon() -->
 
