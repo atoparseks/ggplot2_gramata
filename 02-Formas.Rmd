@@ -188,8 +188,41 @@ ggplot(CO2,aes(uptake,fill=Type)) + geom_histogram(binwidth = 5)
 <!-- ## geom_dotplot() -->
 
 
-<!-- ## geom_abline() -->
+## geom_abline(), geom_hline() un geom_vline()
 
+Ja attēlam ir nepieciešams pievienot diagonālu, horizontālu vai vertikālu līniju, tad jāizmanto attiecīgi `geom_abline()`, `geom_hline()` vai `geom_vline()`.
+
+Diagonālas līnijas pievienošanai jānorāda divas vērtības: `slope=` (norāda slīpumu) un `intercept=` (norāda, kur krusto y asi, ja x=0) (\@ref(fig:abl1) attēls).
+
+```{r abl1, fig.cap="Izkliedes diagramma ar pievienotu diagonālu līniju"} 
+ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_abline(intercept = 5, slope = 0.04)
+```
+
+Horizontālas līnijas pievienošanai izmanto `geom_hline()`, kurai kā arguments jānorāda `yintercept = ` (kādai y vērtībai atbilst līnija) (\@ref(fig:hor1) attēls).
+
+```{r hor1, fig.cap="Izkliedes diagramma ar pievienotu horizontālu līniju"} 
+ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_hline(yintercept = 20)
+```
+
+Pie argumentu `yintercept = ` var norādīt arī uzreiz vairākas vērtības, kā redzultātā parādīsies vairākas līnijas (\@ref(fig:hor2) attēls).
+
+```{r hor2, fig.cap="Izkliedes diagramma ar pievienotām vairākām horizontālām līnijām"} 
+ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_hline(yintercept = c(20,30,40))
+```
+
+Līnijas novietojums var būt atkarīgs no kāda mainīgā datos, tikai šajā gadījumā argumentam `yintercept = ` jāatrodas funkcijā `aes()` (\@ref(fig:hor4) attēls).
+
+```{r hor4, fig.cap="Izkliedes diagramma ar pievienotu horizontālu līniju"} 
+dati.papildus <- data.frame(limeni=c(10,20,30,40))
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      geom_hline(data=dati.papildus,aes(yintercept = limeni))
+```
+
+Vertikālas līnijas pievieno ar funkciju `geom_vline()` un argumentu `xintercept = ` (kādai x vērtībai atbilst līnija) (\@ref(fig:ver1) attēls). Pārējie darbības principi ir līdzīgi `geom_hline()`.
+
+```{r ver1, fig.cap="Izkliedes diagramma ar pievienotu vertikālu līniju"} 
+ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_vline(xintercept = 500)
+```
 
 <!-- ## geom_density() -->
 
