@@ -1,5 +1,53 @@
 # Attēlu sadalīšana
 
-<!-- ## facet_wrap() -->
+Viena no ggplot2 sistēmas lielajām priekšrocībām ir tā, ka izmantojot tam speciāli paredzētas funkcijas (`facet_wrap()` un `facet_grid()`), ir iespējams sadalīt attēlu vairākās daļās balstoties uz vienu vai vairākiem mainīgiem, kur katrs mazais attēls ir daļa no kopējā datu attēlojuma.
 
-<!-- ## facet_grid() -->
+## facet_grid()
+
+Izmantojot funkciju `facet_grid()`, var norādīt divus mainīgos pēc kuriem dalīt datus. Pirmais mainīgais (pirms tildes zīmes) norāda dalījumu rindās, bet otrais mainīgais aiz tildes zīmes norāda dalījumu kolonnās. Ja ir vēlme dalīt tikai vienā dimensijā, tad neizmantotās dimensijas (mainīgā) vietā jānorāda ".". 
+
+Pirmajā piemēra attēls sadalīts mazākos attēlos balstoties tikai uz mainīgo `Type` kolonnās (\@ref(fig:grid1) attēls).
+
+```{r grid1,fig.cap="Attēla sadalīšana kolonnās balstoties uz vienu mainīgo"}
+ggplot(CO2,aes(conc,uptake))+geom_point() + facet_grid(.~Type)
+```
+
+Norādot mainīgo Treatment pirms tildes zīmes, izveidojas attēls, kas sadalīts rindās atbilstoši šī mainīgā līmeņiem (\@ref(fig:grid2) attēls).
+
+```{r grid2,fig.cap="Attēla sadalīšana rindās balstoties uz vienu mainīgo"}
+ggplot(CO2,aes(conc,uptake))+geom_point() + facet_grid(Treatment~.)
+```
+
+Norādot abus divus mainīgos, izveidojas attēls, kurā mazie attēliņi ir atbilstošo mainīgo līmeņu kombinācijas (\@ref(fig:grid3) attēls).
+
+```{r grid3,fig.cap="Attēla sadalīšana balstoties uz diviem mainīgiem"}
+ggplot(CO2,aes(conc,uptake))+geom_point() + facet_grid(Treatment~Type)
+```
+
+Pievienojot argumentu margins = TRUE, var panākt, ka veidojas ne tikai atsevišķi mazie attēli, bet arī attēli, kuros mainīgo līmeņi skatīti kopā (\@ref(fig:grid4) attēls).
+
+
+```{r grid4,fig.cap="Attēla sadalīšana balstoties uz diviem mainīgiem, parādot arī kopējos attēlus"}
+ggplot(CO2,aes(conc,uptake))+geom_point() + 
+      facet_grid(Treatment~Type,margins = TRUE)
+```
+
+## facet_wrap()
+
+`facet_wrap() gadījumā mazie attēliņi tiek novietoti viens aiz otra, ar iespēju norādīt cik rindās/kolonnās tos nepieciešams izvietot. Attēlu sadalīšanu var veikt, piemēram, ar vienu mainīgo (nav jāizmanto "." pirms tildes) (\@ref(fig:wrap1) attēls).
+
+```{r wrap1, fig.cap="Attēlā sadalīšana daļās ar facet_wrap()"}
+ggplot(mpg,aes(cty,hwy)) + geom_point() + facet_wrap(~class,ncol=4)
+```
+
+Dalīšanu daļās var veikt arī ar vairākiem mainīgajiem, norādot tos aiz tildes zīmes (\@ref(fig:wrap2) attēls).
+
+```{r wrap2, fig.cap="Attēlā sadalīšana daļās ar facet_wrap() un diviem mainīgiem"}
+ggplot(mpg,aes(cty,hwy)) + geom_point() + facet_wrap(~cyl + drv,ncol=4)
+```
+
+Attēla sadalīšanai daļās var izmantot arī papildus funkcijas, piemēram, sadalot skaitlisku mainīgo daļās (\@ref(fig:wrap3) attēls).
+
+```{r wrap3, fig.cap="Attēlā sadalīšana daļās ar facet_wrap() un dalījums balstās uz skaitlisku mainīgo, kas sadalīts intervālos"}
+ggplot(mpg,aes(cty,hwy)) + geom_point() + facet_wrap(~cut_number(displ,6))
+```
