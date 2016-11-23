@@ -39,7 +39,31 @@ ggplot(CO2,aes(conc,uptake))+geom_point()+
       scale_y_continuous(sec.axis = sec_axis(~./100,name="Otrā y ass"))
 ```
 
-<!-- ## scale_x_discrete() un scale_y_discrete() -->
+## scale_x_discrete() un scale_y_discrete()
+
+Gadījumos, kad uz x vai y ass attēlotas kategorijas mainīgā vērtības, ir jāizmanto attiecīgi funkcijas `scale_x_discrete()` un `scale_y_discrete()`, lai mainītu šo asu izskatu.
+
+Ar argumentu `limits=` ir iespējams norādīt, kuras tieši vērtības attēlot uz ass (atmest kādu no līmeņiem) (\@ref(fig:diskr1) attēls).
+
+```{r diskr1,fig.cap="Attēls ar kategorijas x asi, kur attēloti tikai daži līmeņi"}
+ggplot(mpg,aes(drv,hwy)) + geom_boxplot() +
+      scale_x_discrete(limits = c("f","r"))
+```
+
+Arguments `limits=` ļauj arī mainīt secību, kādā parādās līmeņi pie atbilstošās ass (\@ref(fig:diskr2) attēls).
+
+```{r diskr2,fig.cap="Attēls ar kategorijas x asi, kur mainīta līmeņu secība"}
+ggplot(mpg,aes(drv,hwy)) + geom_boxplot() +
+      scale_x_discrete(limits = c("r","4","f"))
+```
+
+Līmeņu nosaukumu maiņai izmanto argumentu `labels=`, kur jānorāda jaunie līmeņu nosaukumi tādā secībā, kā tie parādās pie atbilstošās ass, vai arī jānorāda vecais un jaunais nosaukums un tad secībai nav nozīmēs (\@ref(fig:diskr3) attēls). Jāņem vērā, ka arguments `labels=` nemaina līmeņu attēlojuma secību, pat ja mainīta kārtība to nosaukumiem.
+
+```{r diskr3,fig.cap="Attēls ar kategorijas x asi, kur mainīti līmeņu nosaukumi"}
+ggplot(mpg,aes(drv,hwy)) + geom_boxplot() +
+      scale_x_discrete(labels = c("4"="Četri","r"="Pakaļējie","f"="Priekšējie"))
+```
+
 
 <!-- ## scale_colour_...() -->
 
