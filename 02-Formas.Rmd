@@ -254,7 +254,42 @@ ggplot(CO2,aes(Type,uptake,fill=Treatment))+geom_boxplot()+
 <!-- ## geom_ribbon() -->
 
 
-<!-- ## geom_smooth() -->
+## geom_smooth()
+
+Ja ir vēlme attēlam pievienot trenda līniju, tad jāizmanto `geom_smooth()`. Pēc noklusējuma izveidojas izlīdzīnātā trenda līnija un tās ticamības intervāls ar metodi loess (\@ref(fig:smoo1) attēls).
+
+```{r smoo1,fig.cap="Izkliedes diagrammas ar pievienotu trenda līniju"}
+ggplot(CO2,aes(conc,uptake))+geom_point()+
+      geom_smooth()
+```
+
+Lineārās trenda līnijas pievienošanai, jānorāda arguments `method="lm"` (\@ref(fig:smoo2) attēls).
+
+```{r smoo2,fig.cap="Izkliedes diagrammas ar pievienotu lineāro trenda līniju"}
+ggplot(CO2,aes(conc,uptake))+geom_point()+
+      geom_smooth(method="lm")
+```
+
+Ar argumentu `se=FALSE` var noņemt ticamības intervālu (\@ref(fig:smoo3) attēls).
+
+```{r smoo3,fig.cap="Izkliedes diagrammas ar pievienotu lineāro trenda līniju, toties bez ticamības intervāla"}
+ggplot(CO2,aes(conc,uptake))+geom_point()+
+      geom_smooth(method="lm", se=FALSE)
+```
+
+Trenda līnijas krāsu maina ar argumentu `color=`, bet ticamības intervāla aizpildījumu ar argumentu `fill=`. Ja vienu vai abus no šiem argumentiem norāda `aes()` iekavās un tas ir atkarīgs no kāda mainīgā, tad trenda līnijas tiek izveidotas katram līmenim (\@ref(fig:smoo4) attēls).
+
+```{r smoo4,fig.cap="Izkliedes diagrammas ar pievienotu lineāro trenda līniju dažādiem līmeņiem"}
+ggplot(CO2,aes(conc,uptake))+geom_point()+
+      geom_smooth(method="lm",aes(color=Type,fill=Type))
+```
+
+Trenda līniju var veidot ne tikai izmantojot esošo formulu `y ~ x`, bet arī izmantojot kādu citu saistību starp abiem mainīgajiem. Šajā gadījumā jāizmanto arguments `formula =` un jālieto apzīmējumi x un y, nevis oriģinālie mainīgo nosaukumi (\@ref(fig:smoo5) attēls).
+
+```{r smoo5,fig.cap="Izkliedes diagrammas ar pievienotu īpašu trenda līniju"}
+ggplot(CO2,aes(conc,uptake))+geom_point()+
+      geom_smooth(method="lm",formula = y ~ x + I(x^2))
+```
 
 
 <!-- ## geom_violin() -->
