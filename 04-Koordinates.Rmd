@@ -1,10 +1,47 @@
 # Koordinātu sistēmas
 
-<!-- ## coord_cartesian() -->
+Funkcijas koordinātu sistēmu noteikšanai izmanto, lai mainītu uz ass attēlojamo vērtību diapozonu, kā arī, lai mainītu vērtību attiecības starp x un y asīm.
 
-<!-- ## coord_fixed() -->
+## coord_cartesian()
 
-<!-- ## coord_flip() -->
+Pamatkoordinātu sistēma ir `cartesian`, kas tiek izmantota pēc noklusējuma. Ar funkciju `coord_cartesian()` var mainīt x un y ass diapozonu (to palielinot vai samazinot). Svarīgākais šajā procesā ir tas, ka mainās tikai attēlā redzamā datu daļa, bet netiek mainīts attēla veidošanai izmantotais datu apjoms (strādā līdzīgi kā "zoom") (\@ref(fig:cart1) attēls).
+
+```{r cart1,fig.cap="Izkliedes attēls ar mainītu asu diapozonu"}
+ggplot(CO2,aes(conc,uptake))+geom_point() + geom_smooth(method="lm") +
+      coord_cartesian(xlim=c(250,750),ylim=c(0,50))
+```
+
+Norādītajiem asu limitiem automātiski tiek pievienota neliela papildus vieta. Ja ir nepieciešams, lai attēls būtu precīzi noteiktajā diapozonā, tad jāpievieno arguments `expand = FALSE` (\@ref(fig:cart2) attēls).
+
+```{r cart2,fig.cap="Izkliedes attēls ar precīzu mainītu asu diapozonu"}
+ggplot(CO2,aes(conc,uptake))+geom_point() + geom_smooth(method="lm") +
+      coord_cartesian(xlim=c(250,750),ylim=c(0,50),expand = FALSE)
+```
+
+## coord_fixed()
+
+Fiksēto koordinātu sistēmu izmanto tad, ja nepieciešams noteikta attiecība starp vienas vienības izmēru uz x ass un y ass. Pēc noklsējuma vērtība `ratio = 1`, kas nozīmē, ka viena vienība uz x ass ir tikpat gara kā uz y ass (\@ref(fig:fix1) attēls).
+
+```{r fix1,fig.cap="Izkliedes attēls ar fiksētām asīm"}
+ggplot(mpg,aes(cty,hwy)) + geom_point() +
+      coord_fixed()
+```
+
+Norādot pie argumenta `ratio = ` skaitli, kas lielāks par 1, uz y ass vienībā būs tik reizas lielāka, nekā uz x ass; attiecīgi norādot skaitli, kas mazāks par 1, y ass viena vienība būs mazāka nekā uz x ass (\@ref(fig:fix2) attēls).
+
+```{r fix2,fig.cap="Izkliedes attēls ar fiksētām asīm"}
+ggplot(mpg,aes(cty,hwy)) + geom_point() +
+      coord_fixed(ratio = 0.5)
+```
+
+## coord_flip()
+
+Lai samainītu vietām x un y asi, jāizmanto funkcija `coord_flip()` (\@ref(fig:flip1) attēls).
+
+```{r flip1,fig.cap="Vērtībamplitūdas diagramma ar mainītu asu novietojumu"}
+ggplot(CO2,aes(Type,uptake))+geom_boxplot() + 
+      coord_flip()
+```
 
 <!-- ## coord_map() -->
 
