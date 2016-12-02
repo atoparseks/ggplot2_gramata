@@ -11,31 +11,31 @@ Uz x un y ass esošo vērtību, kā arī punktu, līniju, stabiņu krāsu, formu
 x un y ass vērtību maiņai, ja tās skaitliskas (nepārtrauktas), izmanto attiecīgi funkcijas `scale_x_continuous()` un `scale_y_continuous()`. Izmantojot šīs funkcijas var mainīt asu parakstus (arguments `name=`), pozīcijas, kurās parādās skaitļi (`breaks=`) (\@ref(fig:skalas1) attēls).
 
 ```{r skalas1,fig.cap="Nepārtraukto asu piemērs"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
-      scale_x_continuous("Koncentrācija",breaks=c(200,400,500))+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      scale_x_continuous("Koncentrācija",breaks=c(200,400,500)) + 
       scale_y_continuous("Uzņemtais apjoms")
 ```
 
 Ar argumentu `limits=` ir iespējams mainīt katras ass garumu, bet jāņem vērā, ka gadījumā, ja jaunais garums būs mazāks nekā vērtību amplitūda, tad vērtības ārpus ass garumu tiks izslēgtas no attēla (to parāda arī brīdinājums par izslēgtām vērtībām), ietekmējot attēlojumu (\@ref(fig:skalas2) attēls). Tas īpaši attiecas uz stabiņu attēliem, vai attēliem ar trenda līniju.
 
 ```{r skalas2,fig.cap="Izmainītas nepārtrauktās ass piemērs"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
-      scale_x_continuous(limits=c(200,600))+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      scale_x_continuous(limits=c(200,600)) + 
       scale_y_continuous(limits=c(0,50))
 ```
 
 y un x asi ir iespējams arī pārvietot attiecīgi uz labo pusi vai uz augšu, norādot argumentu `position=` (\@ref(fig:skalas3) attēls).
 
 ```{r skalas3,fig.cap="Pārvietotas x un y asis"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
-      scale_y_continuous(position = "right")+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      scale_y_continuous(position = "right") + 
       scale_x_continuous(position = "top")
 ```
 
 Ar argumentu `sec.axis=` gan x, gan y asij ir iespējams izveidot otro asi, bet tikai ar nosacījumu, ka otrā ass ir tieša pamatass transformāciju (\@ref(fig:skalas4) attēls). Tas nozīmē, ka nevar izveidot otru asi, kas parāda pavisam citas vērtības.
 
 ```{r skalas4,fig.cap="Attēls ar otru y asi, kas ir pirmās transformācija"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
       scale_y_continuous(sec.axis = sec_axis(~./100,name="Otrā y ass"))
 ```
 

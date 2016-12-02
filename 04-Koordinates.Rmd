@@ -7,14 +7,16 @@ Funkcijas koordinātu sistēmu noteikšanai izmanto, lai mainītu uz ass attēlo
 Pamatkoordinātu sistēma ir `cartesian`, kas tiek izmantota pēc noklusējuma. Ar funkciju `coord_cartesian()` var mainīt x un y ass diapozonu (to palielinot vai samazinot). Svarīgākais šajā procesā ir tas, ka mainās tikai attēlā redzamā datu daļa, bet netiek mainīts attēla veidošanai izmantotais datu apjoms (strādā līdzīgi kā "zoom") (\@ref(fig:cart1) attēls).
 
 ```{r cart1,fig.cap="Izkliedes attēls ar mainītu asu diapozonu"}
-ggplot(CO2,aes(conc,uptake))+geom_point() + geom_smooth(method="lm") +
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      geom_smooth(method="lm") +
       coord_cartesian(xlim=c(250,750),ylim=c(0,50))
 ```
 
 Norādītajiem asu limitiem automātiski tiek pievienota neliela papildus vieta. Ja ir nepieciešams, lai attēls būtu precīzi noteiktajā diapozonā, tad jāpievieno arguments `expand = FALSE` (\@ref(fig:cart2) attēls).
 
 ```{r cart2,fig.cap="Izkliedes attēls ar precīzu mainītu asu diapozonu"}
-ggplot(CO2,aes(conc,uptake))+geom_point() + geom_smooth(method="lm") +
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      geom_smooth(method="lm") +
       coord_cartesian(xlim=c(250,750),ylim=c(0,50),expand = FALSE)
 ```
 
@@ -39,7 +41,7 @@ ggplot(mpg,aes(cty,hwy)) + geom_point() +
 Lai samainītu vietām x un y asi, jāizmanto funkcija `coord_flip()` (\@ref(fig:flip1) attēls).
 
 ```{r flip1,fig.cap="Vērtībamplitūdas diagramma ar mainītu asu novietojumu"}
-ggplot(CO2,aes(Type,uptake))+geom_boxplot() + 
+ggplot(CO2,aes(Type,uptake)) + geom_boxplot() + 
       coord_flip()
 ```
 

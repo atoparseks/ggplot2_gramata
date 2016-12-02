@@ -7,33 +7,41 @@ ggplot2 sistēmā izveidoto attēlu izskata mainīšanai var izmantot iepriekš 
 Paketē ggplot2 ir definētas astoņas gatavas tēmas attēla izskata maiņai. Attēlā noformējums mainās, pieskaitot klāt atbilstošo tēmas funkciju. Katrā tēmā papildus ir iespējams mainīt pamatteksta izmēru (`base_size=`) un pamatfontu (`base_family=`). Gatovos tēmu noformējumus protams var papildināt arī ar citām izmaiņām konkrētiem elementiem. Attēlos \@ref(fig:theme1), \@ref(fig:theme2), \@ref(fig:theme3), \@ref(fig:theme4), \@ref(fig:theme5), \@ref(fig:theme6), \@ref(fig:theme7), \@ref(fig:theme8) un \@ref(fig:theme9) parādīts kā izskatās sākotnējais attēls un kā tas mainās, izmantojot kādu no gatavajām tēmām.
 
 ```{r theme1,fig.cap="Attēls bez papildus noformējuma"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point()
 ```
 
 ```{r theme2,fig.cap="Attēls ar theme_bw()"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point() + theme_bw()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme_bw()
 ```
 
 ```{r theme3,fig.cap="Attēls ar theme_classic()"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point() + theme_classic()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme_classic()
 ```
 
 ```{r theme4,fig.cap="Attēls ar theme_dark()"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point() + theme_dark()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme_dark()
 ```
 ```{r theme5,fig.cap="Attēls ar theme_grey()"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point() + theme_grey()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme_grey()
 ```
 
 ```{r theme6,fig.cap="Attēls ar theme_light()"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point() + theme_light()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme_light()
 ```
 ```{r theme7,fig.cap="Attēls ar theme_linedraw()"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point() + theme_linedraw()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme_linedraw()
 ```
 ```{r theme8,fig.cap="Attēls ar theme_minimal()"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point() + theme_minimal()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme_minimal()
 ```
 ```{r theme9,fig.cap="Attēls ar theme_void()"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point() + theme_void()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme_void()
 ```

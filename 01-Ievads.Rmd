@@ -27,7 +27,7 @@ ggplot2 sistēmā izveidoto attēlu saglabāšanu var veikt ar funkciju `ggsave(
 ```{r,eval=FALSE}
 library(ggplot2)
 data(CO2)
-ggplot(CO2,aes(conc,uptake))+geom_point()
+ggplot(CO2,aes(conc,uptake)) + geom_point()
 ggsave("Attels_1.png",width = 10,height = 6, units="cm")
 ```
 

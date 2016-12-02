@@ -12,7 +12,7 @@ Ar `geom_point()` ir iespējams veidot izkliedes attēlus (scatterplot) (\@ref(f
 
 ```{r point1,fig.cap="Izkliedes attēla piemērs"}
 library(ggplot2)
-ggplot(CO2,aes(conc,uptake))+geom_point()
+ggplot(CO2,aes(conc,uptake)) + geom_point()
 ```
 
 
@@ -23,31 +23,32 @@ Ja parametram ir jābūt vienādam visiem punktiem, tad tas ir jānorāda ārpus
 Šajā piemērā punktu krāsa un lielums ir mainīts visiem punktiem uzreiz (\@ref(fig:point2) attēls). Krāsu var norādīt kā tās anglisko nosaukumu (tos var apskatīt ar funkciju `colors()`) vai arī izmantojot heksadecimālo kodu.
 
 ```{r point2,fig.cap="Izkliedes attēls, kurā krāsa un lielums visiem punktiem vienāds"}
-ggplot(CO2,aes(conc,uptake))+geom_point(color="green",size=2)
+ggplot(CO2,aes(conc,uptake)) + geom_point(color="green",size=2)
 ```
 
 Ja arguments `color=` atrodas `aes()` iekavās un tas ir atkarīgs no kāda mainīgā, tad punktu krāsa mainīsies atbilstoši vērtībām, kā arī parādīsies atbilstošā leģenda. Krāsu maiņa un leģendas veids ir atkarīgs no tā, kāda veida mainīgais ir izmantots. Ja krāsa ir atkarīga no kategorijas mainīgā, tad krāsas mainīsies diskrēti (\@ref(fig:point3) attēls).
 
 ```{r point3,fig.cap="Izkliedes attēls, kurā krāsa ir atkarīga no kategorijas mainīgā"}
-ggplot(CO2,aes(conc,uptake,color=Type))+geom_point()
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point()
 ```
 
 Toties norādāt kā mainīgo tādu, kas ir skaitlisks, krāsa mainīsies kā gradients (\@ref(fig:point4) attēls).
 
 ```{r point4,fig.cap="Izkliedes attēls, kurā krāsa ir atkarīga no skaitliska mainīgā"}
-ggplot(CO2,aes(conc,uptake,color=uptake))+geom_point()
+ggplot(CO2,aes(conc,uptake,color=uptake)) + geom_point()
 ```
 
 Punktu forma var mainīties tikai atkarībā no kategorijas mainīgā (\@ref(fig:point5) attēls).
 
 ```{r point5,fig.cap="Izkliedes attēls, kurā forma ir atkarīga no kategorijas mainīgā"}
-ggplot(CO2,aes(conc,uptake,shape=Type))+geom_point()
+ggplot(CO2,aes(conc,uptake,shape=Type)) + geom_point()
 ```
 
 Ir iespējams panākt arī, ka, piemēram, punktu forma mainās atkarībā no viena mainīgā, bet krāsa atkarībā no cita mainīgā. Šajā gadījumā parādīsies arī divas leģendas (\@ref(fig:point6) attēls).
 
 ```{r point6,fig.cap="Izkliedes attēls, kurā forma un krāsa ir atkarīga no dažādiem kategorijas mainīgajiem"}
-ggplot(CO2,aes(conc,uptake,shape=Type,color=Treatment))+geom_point()
+ggplot(CO2,aes(conc,uptake,shape=Type,color=Treatment)) + 
+      geom_point()
 ```
 
 ## geom_bar()
@@ -55,24 +56,24 @@ ggplot(CO2,aes(conc,uptake,shape=Type,color=Treatment))+geom_point()
 Stabiņu attēlus veido ar funkciju `geom_bar()`. Šai funkcijai `aes()` ir jānorāda tikai x vērtības (diskrētas), jo novērojumu skaits katrā klasē tiek saskaitīts automātiski (`geom_bar()` balstās un `stat_count()`) (\@ref(fig:bar1) attēls).
 
 ```{r bar1, fig.cap="Stabiņu attēla piemērs"}
-ggplot(mpg,aes(drv))+geom_bar()
+ggplot(mpg,aes(drv)) + geom_bar()
 ```
 Stabiņu attēlā katram stabiņa ir iespējams mainīt krāsu (`color=`) un aizpildījumu (`fill=`). Arguments `color=` nosaka līnijas krāsu apkārt katram no stabiņiem, bet `fill=` nosaka paša stabiņa krāsu (aizpildījumu) (\@ref(fig:bar2) attēls).
 
 ```{r bar2, fig.cap="Stabiņu attēls, kurā stabiņu krāsa un aizpildījums visiem vienāds"}
-ggplot(mpg,aes(drv))+geom_bar(fill="white",color="red")
+ggplot(mpg,aes(drv)) + geom_bar(fill="white",color="red")
 ```
 
 Padarot aizpildījumu atkarīgu no kāda kategrijas mainīgā, izveidojas stabiņu attēls, kur pie katras x mainīgā kategorijas, stabiņš ir sadalītas pa daļām balstoties uz jauno mainīgo (\@ref(fig:bar3) attēls).
 
 ```{r bar3, fig.cap="Stabiņu attēls, kurā stabiņu aizpildījums atkarīgs no mainīgā"}
-ggplot(mpg,aes(drv,fill=factor(cyl)))+geom_bar()
+ggplot(mpg,aes(drv,fill=factor(cyl))) + geom_bar()
 ```
 
 Pieliekot argumentu `position="dodge"`, var panākt, ka pie katras x kategorijas stabiņi ir viens otram blakus, nevis viens virs otra (\@ref(fig:bar4) attēls).
 
 ```{r bar4, fig.cap="Stabiņu attēls, kurā stabiņu aizpildījums atkarīgs no mainīgā"}
-ggplot(mpg,aes(drv,fill=factor(cyl)))+geom_bar(position="dodge")
+ggplot(mpg,aes(drv,fill=factor(cyl))) + geom_bar(position="dodge")
 ```
 
 
@@ -83,7 +84,7 @@ Gadījumos, kad dati ir jau apkopoti un ir nepieciešams izveidot stabiņu attē
 ```{r col1,fig.cap="Stabiņu attēls, kurā skaiti jau doti tabulā"}
 dati <- data.frame(Dzimums=c("S","V"),Skaits=c(23,45))
 dati
-ggplot(dati,aes(Dzimums,Skaits))+geom_col()
+ggplot(dati,aes(Dzimums,Skaits)) + geom_col()
 ```
 
 
@@ -98,7 +99,8 @@ ggplot(mpg,aes(cty,hwy)) + geom_line()
 Līnijām ir iespējams mainīt tās platumu (`size=`), krāsu (`color=`) un līnijas veidu (`linetype=`) (\@ref(fig:line2) attēls).
 
 ```{r line2,fig.cap="Līnija ar izmainītiem parametriem"}
-ggplot(mpg,aes(cty,hwy)) + geom_line(color="red",size=1.5,linetype=2)
+ggplot(mpg,aes(cty,hwy)) + 
+      geom_line(color="red",size=1.5,linetype=2)
 ```
 
 Ja kāds no līnijas parametriem ir atkarīgs no diskrēta trešā mainīgā, tad parādīsies tik daudz līnijas, cik mainīgajam ir līmeņi (\@ref(fig:line3) attēls).
@@ -122,25 +124,28 @@ ggplot(mpg,aes(cty,hwy)) + geom_path()
 Vērtībamplitūdas diagrammas veidošanai izmanto `geom_boxplot()`. Šim attēla veida x vērtībām ir jābūt kvalitatīviem datiem, vai arī skaitliskiem datiem, kas pārvērsti par faktoru. y vērtībām obligāti ir jābūt skaitliskām (\@ref(fig:boxpl1) attēls).
 
 ```{r boxpl1,fig.cap="Vērtībamplitūdas diagrammas piemērs"}
-ggplot(CO2,aes(Type,uptake))+geom_boxplot()
+ggplot(CO2,aes(Type,uptake)) + geom_boxplot()
 ```
 
 Līdzīgi kā stabiņu attēlam vērtībamplitūdas diagrammā var mainīt līniju un punktu krāsu (`color=`) vai arī "kastītes" aizpildījumu (`fill=`) (\@ref(fig:boxpl2) attēls).
 
 ```{r boxpl2,fig.cap="Vērtībamplitūdas diagramma ar izmainītu līniju un kastītes krāsu"}
-ggplot(CO2,aes(Type,uptake))+geom_boxplot(color="green",fill="red")
+ggplot(CO2,aes(Type,uptake)) + 
+      geom_boxplot(color="green",fill="red")
 ```
 
 Izlēcēju (neraksturīgo vērtību) punktu krāsu, formu un izmēru var mainīt arī atsevišķi, izmantojot argumentus `outlier.color=`, `outlier.shape=` un `outlier.size=` (\@ref(fig:boxpl3) attēls).
 
 ```{r boxpl3,fig.cap="Vērtībamplitūdas diagramma ar izmainītu izlēcēju krāsu, formu un izmēru"}
-ggplot(CO2,aes(Type,uptake))+geom_boxplot(outlier.color = "red",outlier.shape = 13,outlier.size = 3)
+ggplot(CO2,aes(Type,uptake)) + 
+      geom_boxplot(outlier.color = "red",outlier.shape = 13,outlier.size = 3)
 ```
 
 Ja arguments `fill=` atrodas funkcijas `aes()` iekavās un tas ir atkarīgs no kāda mainīgā, tad pie katras atbilstošās x vērtības, vērtībamplitūdas diagramma tiek sadalīta tik daļās, cik līmeņi ir papildus mainīgajam, kā arī parādās atbilstošā leģenda ar izmantotajām aizpildījuma krāsām  (\@ref(fig:boxpl4) attēls).
 
 ```{r boxpl4,fig.cap="Vērtībamplitūdas diagramma, kurā katram faktora līmenim diagramma sadalīta daļās"}
-ggplot(CO2,aes(Type,uptake,fill=Treatment))+geom_boxplot()
+ggplot(CO2,aes(Type,uptake,fill=Treatment)) + 
+      geom_boxplot()
 ```
 
 ## geom_count()
@@ -174,12 +179,14 @@ ggplot(CO2,aes(uptake)) + geom_histogram(binwidth = 10)
 Tā kā histogrammā parādās stabiņi, tad tiem ir iespējams mainīt gan līnijas krāsu (`color=`), gan arī aizpildījumu (`fill=`) (\@ref(fig:hist3) attēls).
 
 ```{r hist3,fig.cap="Histogrammas ar mainītu izskatu"}
-ggplot(CO2,aes(uptake)) + geom_histogram(color="green",fill="white")
+ggplot(CO2,aes(uptake)) + 
+      geom_histogram(color="green",fill="white")
 ```
 Norādot, ka aizpildījums ir atkarīgs no mainīgā, izveidosies histogramma, kurā katrs stabiņš sadalīts daļās atbilstoši novērojumu skaitam katrā no līmeņiem (\@ref(fig:hist4) attēls).
 
 ```{r hist4,fig.cap="Histogrammas, kur aizpildījums atkarīgs no mainīgā"}
-ggplot(CO2,aes(uptake,fill=Type)) + geom_histogram(binwidth = 5)
+ggplot(CO2,aes(uptake,fill=Type)) + 
+      geom_histogram(binwidth = 5)
 ```
 
 <!-- ## geom_crossbar(), geom_errobar(), geom_ linerange() un geom_pointrange() -->
@@ -195,19 +202,22 @@ Ja attēlam ir nepieciešams pievienot diagonālu, horizontālu vai vertikālu l
 Diagonālas līnijas pievienošanai jānorāda divas vērtības: `slope=` (norāda slīpumu) un `intercept=` (norāda, kur krusto y asi, ja x=0) (\@ref(fig:abl1) attēls).
 
 ```{r abl1, fig.cap="Izkliedes diagramma ar pievienotu diagonālu līniju"} 
-ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_abline(intercept = 5, slope = 0.04)
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      geom_abline(intercept = 5, slope = 0.04)
 ```
 
 Horizontālas līnijas pievienošanai izmanto `geom_hline()`, kurai kā arguments jānorāda `yintercept = ` (kādai y vērtībai atbilst līnija) (\@ref(fig:hor1) attēls).
 
 ```{r hor1, fig.cap="Izkliedes diagramma ar pievienotu horizontālu līniju"} 
-ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_hline(yintercept = 20)
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      geom_hline(yintercept = 20)
 ```
 
 Pie argumentu `yintercept = ` var norādīt arī uzreiz vairākas vērtības, kā redzultātā parādīsies vairākas līnijas (\@ref(fig:hor2) attēls).
 
 ```{r hor2, fig.cap="Izkliedes diagramma ar pievienotām vairākām horizontālām līnijām"} 
-ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_hline(yintercept = c(20,30,40))
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      geom_hline(yintercept = c(20,30,40))
 ```
 
 Līnijas novietojums var būt atkarīgs no kāda mainīgā datos, tikai šajā gadījumā argumentam `yintercept = ` jāatrodas funkcijā `aes()` (\@ref(fig:hor4) attēls).
@@ -221,7 +231,8 @@ ggplot(CO2,aes(conc,uptake)) + geom_point() +
 Vertikālas līnijas pievieno ar funkciju `geom_vline()` un argumentu `xintercept = ` (kādai x vērtībai atbilst līnija) (\@ref(fig:ver1) attēls). Pārējie darbības principi ir līdzīgi `geom_hline()`.
 
 ```{r ver1, fig.cap="Izkliedes diagramma ar pievienotu vertikālu līniju"} 
-ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_vline(xintercept = 500)
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
+      geom_vline(xintercept = 500)
 ```
 
 <!-- ## geom_density() -->
@@ -232,19 +243,20 @@ ggplot(CO2,aes(conc,uptake)) + geom_point() + geom_vline(xintercept = 500)
 Gadījumos, kad nepieciešams izveidot izkliedes (punktu) diagrammu, bet vērojam vērtību pārklāšanās (daudz identisku vērtību), var izmantot `geom_jitter()`, kur punktiem tiek veikta neliela nobīde x vai y (vai abu) ass virzienā, lai novērstu pārklāšanos. Šādu attēlošanas veidu sevišķi ērti izmantot, ja x vērtības ir kategorijas mainīgais, jo tad izkliede notiek tikai x ass virzienā, bet y ass virzienā redzamas reālās vērtības  (\@ref(fig:jit1) attēls).
 
 ```{r jit1, fig.cap="Izkliedes diagramma, kurā x virzienā nejauši mainīts punktu izvietojums"}
-ggplot(CO2,aes(Type,uptake))+geom_jitter()
+ggplot(CO2,aes(Type,uptake)) + geom_jitter()
 ```
 
 `geom_jitter()` ir labi izmantot kombinācijā ar `geom_boxplot()`, jo tādējādi gan parādās reālās vērtības, gan arī vērtību apkopojums (\@ref(fig:jit2) attēls).
 
 ```{r jit2, fig.cap="Izkliedes diagrammas un vērtībamplitūdas diagrammas kombinācija"}
-ggplot(CO2,aes(Type,uptake))+geom_boxplot()+geom_jitter()
+ggplot(CO2,aes(Type,uptake)) + geom_boxplot() + 
+      geom_jitter()
 ```
 
 `geom_jitter()` un `geom_boxplot()` var kombinēt arī gadījumos, kad vērtībamplitūdas diagramma ir sadalīta atbilsotīs trešā mainīgā līmeņiem, bet šajā gadījumā papildus ir jānorāda arguments `position=position_jitterdodge()`, lai punktu izvietojums atbilstu reālajam vērtību sadalījumam pa līmeņiem (\@ref(fig:jit3) attēls).
 
 ```{r jit3,fig.cap="Izkliedes diagrammas un vērtībamplitūdas diagrammas kombinācija gadījumā, kad iesaistīts trešais mainīgais dalījuma līmeņiem"}
-ggplot(CO2,aes(Type,uptake,fill=Treatment))+geom_boxplot()+
+ggplot(CO2,aes(Type,uptake,fill=Treatment)) + geom_boxplot() + 
       geom_jitter(position=position_jitterdodge())
 ```
 
@@ -259,35 +271,35 @@ ggplot(CO2,aes(Type,uptake,fill=Treatment))+geom_boxplot()+
 Ja ir vēlme attēlam pievienot trenda līniju, tad jāizmanto `geom_smooth()`. Pēc noklusējuma izveidojas izlīdzīnātā trenda līnija un tās ticamības intervāls ar metodi loess (\@ref(fig:smoo1) attēls).
 
 ```{r smoo1,fig.cap="Izkliedes diagrammas ar pievienotu trenda līniju"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
       geom_smooth()
 ```
 
 Lineārās trenda līnijas pievienošanai, jānorāda arguments `method="lm"` (\@ref(fig:smoo2) attēls).
 
 ```{r smoo2,fig.cap="Izkliedes diagrammas ar pievienotu lineāro trenda līniju"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
       geom_smooth(method="lm")
 ```
 
 Ar argumentu `se=FALSE` var noņemt ticamības intervālu (\@ref(fig:smoo3) attēls).
 
 ```{r smoo3,fig.cap="Izkliedes diagrammas ar pievienotu lineāro trenda līniju, toties bez ticamības intervāla"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
       geom_smooth(method="lm", se=FALSE)
 ```
 
 Trenda līnijas krāsu maina ar argumentu `color=`, bet ticamības intervāla aizpildījumu ar argumentu `fill=`. Ja vienu vai abus no šiem argumentiem norāda `aes()` iekavās un tas ir atkarīgs no kāda mainīgā, tad trenda līnijas tiek izveidotas katram līmenim (\@ref(fig:smoo4) attēls).
 
 ```{r smoo4,fig.cap="Izkliedes diagrammas ar pievienotu lineāro trenda līniju dažādiem līmeņiem"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
       geom_smooth(method="lm",aes(color=Type,fill=Type))
 ```
 
 Trenda līniju var veidot ne tikai izmantojot esošo formulu `y ~ x`, bet arī izmantojot kādu citu saistību starp abiem mainīgajiem. Šajā gadījumā jāizmanto arguments `formula =` un jālieto apzīmējumi x un y, nevis oriģinālie mainīgo nosaukumi (\@ref(fig:smoo5) attēls).
 
 ```{r smoo5,fig.cap="Izkliedes diagrammas ar pievienotu īpašu trenda līniju"}
-ggplot(CO2,aes(conc,uptake))+geom_point()+
+ggplot(CO2,aes(conc,uptake)) + geom_point() + 
       geom_smooth(method="lm",formula = y ~ x + I(x^2))
 ```
 
@@ -297,13 +309,14 @@ ggplot(CO2,aes(conc,uptake))+geom_point()+
 Īpašs datu attēlošanas veids ir `geom_violin()`, kas sevī apvieno gan vērtībaplitūdas īpašības, gan arī blīvuma attēla īpašības. Pēc būtības tas ir blīvuma attēls, kurā vērtību blīvuma funkcijas attēlojums dots spoguļattēlā  (\@ref(fig:viol1) attēls).
 
 ```{r viol1,fig.cap="geom_violin() attēls"}
-ggplot(CO2,aes(Type,uptake))+geom_violin()
+ggplot(CO2,aes(Type,uptake)) + geom_violin()
 ```
 
 Ar argumentu `draw_quantiles = ` attēlu var papildināt ar kvartiļu pozīcijām (\@ref(fig:viol2) attēls).
 
 ```{r viol2,fig.cap="geom_violin() attēls ar pievienotām kvartilēm"}
-ggplot(CO2,aes(Type,uptake))+geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+ggplot(CO2,aes(Type,uptake)) + 
+      geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
 ```
 
 Pievienojot argumenu `fill =` funkcijā `aes()`, attēls tiek sadalīts katram no faktora līmeņiem (\@ref(fig:viol3) attēls).
