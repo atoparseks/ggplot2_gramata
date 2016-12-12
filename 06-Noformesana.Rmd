@@ -7,42 +7,42 @@ ggplot2 sistēmā izveidoto attēlu izskata mainīšanai var izmantot iepriekš 
 Paketē ggplot2 ir definētas astoņas gatavas tēmas attēla izskata maiņai. Attēlā noformējums mainās, pieskaitot klāt atbilstošo tēmas funkciju. Katrā tēmā papildus ir iespējams mainīt pamatteksta izmēru (`base_size=`) un pamatfontu (`base_family=`). Gatovos tēmu noformējumus protams var papildināt arī ar citām izmaiņām konkrētiem elementiem. Attēlos \@ref(fig:theme1), \@ref(fig:theme2), \@ref(fig:theme3), \@ref(fig:theme4), \@ref(fig:theme5), \@ref(fig:theme6), \@ref(fig:theme7), \@ref(fig:theme8) un \@ref(fig:theme9) parādīts kā izskatās sākotnējais attēls un kā tas mainās, izmantojot kādu no gatavajām tēmām.
 
 ```{r theme1,fig.cap="Attēls bez papildus noformējuma"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point()
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point()
 ```
 
 ```{r theme2,fig.cap="Attēls ar theme_bw()"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme_bw()
 ```
 
 ```{r theme3,fig.cap="Attēls ar theme_classic()"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme_classic()
 ```
 
 ```{r theme4,fig.cap="Attēls ar theme_dark()"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme_dark()
 ```
 ```{r theme5,fig.cap="Attēls ar theme_grey()"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme_grey()
 ```
 
 ```{r theme6,fig.cap="Attēls ar theme_light()"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme_light()
 ```
 ```{r theme7,fig.cap="Attēls ar theme_linedraw()"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme_linedraw()
 ```
 ```{r theme8,fig.cap="Attēls ar theme_minimal()"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme_minimal()
 ```
 ```{r theme9,fig.cap="Attēls ar theme_void()"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme_void()
 ```
 
@@ -68,7 +68,7 @@ Attēla virsraksta izskatu (bet ne tā saturu) maina ar argumentu `plot.title =`
 Pirmajā piemēra teksta virsraksts pārveidots zaļā krāsā, 20 fonta izmērā un slīprakstā (\@ref(fig:thvir1) attēls).
 
 ```{r thvir1,fig.cap="Attēls ar mainītu virsraksta izskatu"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       labs(title = "CO2 attēls")+
       theme(plot.title = element_text(colour = "green",
                                       size = 20,
@@ -78,9 +78,18 @@ ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() +
 Jaunākajā ggplot2 verijā (2.2.0) virsraksts automātiski ir novietots attēla kreisajā pusē, to var izmainīt ar argumentu `hjust = ` un vērtību 0.5 (0 - kreisā mala, 1 - labā mala, 0.5 - pa vidu) (\@ref(fig:thvir2) attēls). 
 
 ```{r thvir2,fig.cap="Attēls ar mainītu virsraksta novietojumu"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       labs(title = "CO2 attēls")+
       theme(plot.title = element_text(hjust = 0.5))
+```
+
+Ja attēlam ir arī apakšvirsraksts, tad tā izskatu maina ar argumentu `plot.subtitle = ` (\@ref(fig:thvir3) attēls).
+
+```{r thvir3,fig.cap="Attēls ar mainītu apakšvirsrakstu"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      labs(title = "CO2 attēls", subtitle = "Koncentrācijas ietekme")+
+      theme(plot.subtitle = element_text(face = "bold",
+                                         colour = "blue"))
 ```
 
 ### Asu paraksti
@@ -90,7 +99,7 @@ Asu parakstu maiņa notiek ar elementu `axis.title = ` (abas asis vienlaicīgi),
 Asu paraksti arī ir teksts, tāpēc izmantojama funkcija `element_text()` (\@ref(fig:thasp1) attēls).
 
 ```{r thasp1,fig.cap="Attēls ar vienādu asu parakstu noformējumu"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme(axis.title = element_text(size = 15,
                                       face = "bold"))
 ```
@@ -98,7 +107,7 @@ ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() +
 Izmantojot argumentus `axis.title.x = ` un `axis.title.y =` var mainīt katru asi atsevišķi, piemēram, vienais asij noņemot parakstu, bet otrai to izmainot (\@ref(fig:thasp2) attēls).
 
 ```{r thasp2,fig.cap="Attēls ar x asi bez paraksta"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme(axis.title.x = element_blank(),
             axis.title.y = element_text(colour = "red"))
 ```
@@ -109,7 +118,7 @@ Apzīmējumus pie asīm (skaitļus vai līmeņu nosaukumus) maina ar argumentiem
 
 
 ```{r thasa1,fig.cap="Attēls ar mainītiem asu apzīmējumiem"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme(axis.text.x = element_text(angle = 45, hjust = 1),
             axis.text.y = element_text(angle = 90, hjust = 0.5))
 ```
@@ -119,13 +128,166 @@ ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() +
 Pēc noklusējuma vairākām tēmām nerādās asu līnijas. Tās var pievienot ar argumentu `axis.line = `, vai `axis.line.x = ` un `axis.line.y = `. Tā kā tās ir līnijas, tad to izskata maiņai izmanto funkciju `element_line()` (\@ref(fig:thasl1) attēls).
 
 ```{r thasl1,fig.cap="Attēls ar asu līnijām"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme(axis.line = element_line(linetype = "longdash"))
 ```
 
-Asu līniju galos ir iespējams arī pievienot bultiņu ar argumentu `arrow =` un funkciju `arrow()` (\@ref(fig:thasl2) attēls).
+Asu līniju galos ir iespējams arī pievienot bultiņu ar argumentu `arrow =` un funkciju `arrow()`, kurā norāda argumentu `length = ` un bultiņas garumu un mērvienību (funkcijā `unit()`) (\@ref(fig:thasl2) attēls).
 
 ```{r thasl2,fig.cap="Attēls ar bultiņām pie asīm"}
-ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme(axis.line = element_line(arrow = arrow(length = unit(2, 'mm'))))
+```
+
+### Leģendas novietojums
+
+Leģendas novietojuma nosaka ar argumentu `legend.position = ` un iespējamāma vērtībām `"none"`, `"left"`, `"right"`, `"bottom"` un `"top"` (\@ref(fig:thlen1) attēls).
+
+```{r thlen1,fig.cap="Attēls ar leģendu apakšā"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.position = "bottom")
+```
+
+Ja nepieciešams novietot leģendu attēla iekšienē, tad jānora reletīvās x un y koordinātes, kur `c(0,0)` atbilst attēla apakšējam kreisajam stūrim un `c(1,1)` attēla augšējam labajam stūrim (\@ref(fig:thlen2) attēls).
+
+```{r thlen2, fig.cap="Attēls ar leģendu attēla iekšienē"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.position = c(0.1,0.8))
+```
+
+Leģendas novietojumā var mainīt arī leģendas ierakstu izvietojumu horizontāli vai vertikāli ar argumentu `legend.direction = ` (\@ref(fig:thlen3) attēls)
+
+```{r thlen3,fig.cap="Attēls ar leģendu apakšā un leģendas ierakstiem izkārtotiem vertikāli"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.position = "bottom",
+            legend.direction = "vertical")
+```
+
+Leģendas novietojumu var ietekmē arī mainot atstarpi starp leģendu un pamatattēlu ar argumentu `legend.box.spacing = ` un funkciju `unit()`, kurā norāda vēlamo atstarpes izmēru un mērvienību  (\@ref(fig:thlen4) attēls).
+
+```{r thlen4,fig.cap="Attēls ar tālāk novietotu leģendu"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.box.spacing = unit(1, "cm"))
+```
+
+### Leģendas virsraksts
+
+Leģendas virsrakstam var mainīt izskatu (`legend.title = `) līdzīgi kā citiem teksta elementiem, kā arī mainīt leģendas virsraksta novietojumu (`legend.title.align = `) ar vērtībām no 0 (pa kreisi) līdz 1 (pa labi) (\@ref(fig:thlev1) attēls).
+
+```{r thlev1, fig.cap="Attēls ar mainītu leģendas virsrakstu"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.title = element_text(size = 15,
+                                        color = "darkgreen",
+                                        face = "bold.italic"),
+            legend.title.align = 1)
+```
+
+### Leģendas pamatne
+
+Kopējo leģendas pamatnes izskatu var mainīt ar argumenu `legend.background = ` un funkciju `element_rect()` (\@ref(fig:thleb1) attēls). 
+
+```{r thleb1, fig.cap="Attēls ar mainītu leģendas pamatni"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.background = element_rect(fill = "grey73",
+                                                 colour = "black"))
+```
+
+Ja attēlam ir divas vai vairākas leģendas, tad `legend.background = ` maina katras atsevišķas leģendas pamatni, bet kopējo pamatni maina ar argumentu `legend.box.background = ` (\@ref(fig:thleb2) attēls).
+
+```{r thleb2, fig.cap="Attēls ar mainītu abu leģendu pamatni"}
+ggplot(CO2,aes(conc,uptake,color = Type, shape = Treatment)) + geom_point() + 
+      theme(legend.box.background = element_rect(fill = "grey73",
+                                                 colour = "black"),
+            legend.background = element_rect(fill = "grey90"))
+```
+
+### Leģendas teksti
+
+Leģendas ierakstu tekstus maina ar argumentiem `legend.text = ` (to izskats) un `legend.text.align = ` (to novietojums pa kreisi (0) vai labi (1))  (\@ref(fig:thlet1) attēls).
+
+```{r thlet1, fig.cap="Attēls ar mainītu leģendu tekstu"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.text = element_text(size = 7,
+                                       angle = 5),
+            legend.text.align = 0.8)
+```
+
+### Leģendas ieraksti
+
+Pašu leģendas ierakstu, kuros parādas, piemēram, krāsu līmeņi vai simbolu veidi, mainīšanai ir pieejams parametrs `legend.key = `, kas maina ieraksta pamatnes izskatu  (\@ref(fig:thlez1) attēls).
+
+```{r thlez1, fig.cap="Attēls ar mainītu leģendu ieraksta pamatni"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.key = element_rect(fill = "lightblue",
+                                      color = "blue"))
+```
+
+Leģendas ierakstu pamatnes izmēru maiņai izmanto argumentu `legend.key.size = `, kas uzreiz maina vienādā apjomā gan platumu, gan augstumu, vai arī parametrus `legend.key.height = ` un `legend.key.width = `, kas attiecīgi maina tikai augstumu, vai tikai platumu. Visiem šiem argumentiem ir jāizmanto funkcija `unit()`, lai noteiktu šo izmēru (\@ref(fig:thlez2) attēls).
+
+```{r thlez2, fig.cap="Attēls ar mainītu leģendu ierakstu izmēru"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(legend.key.height = unit(0.5, "cm"),
+            legend.key.width = unit(1, "cm"))
+```
+
+### Attēla iekšējās daļas pamatne
+
+Attēla iekšējās daļas pamatnes izskata maina ar argumentu `panel.background = `. Ja šo argumentu lieto kopā ar funkciju `element_blank()`, tad tiek noņemta pamatnes krāsa (aizpildījums) (\@ref(fig:thpam1) attēls).
+
+```{r thpam1, fig.cap="Attēls ar noņemta iekšējās daļas pamatni"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(panel.background = element_blank())
+```
+
+Lai noņemtu tikai krāsu, arguments `fill = ` jānorāda kā NA. Ja papildus norāda argumenu "colour = ", tad apkārt attēla iekšējai daļai parādās līnija (\@ref(fig:thpam2) attēls).
+
+```{r thpam2, fig.cap="Attēls ar līniju apkārt iekšējai daļai"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(panel.background = element_rect(fill = NA, color = "black"))
+```
+
+
+### Palīglīnijas (gridlines)
+
+Visu palīglīniju ietekmēšanai jāizmanto arguments `panel.grid = `, piemēram, tā vērtību norādot kā `element_blank()` tiks noņemtas visas palīglīnijas (\@ref(fig:thpal1) attēls).
+
+```{r thpal1, fig.cap="Attēls bez palīglīnijām"}
+ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
+      theme(panel.grid = element_blank())
+```
+
+Ir iespējams arī ietekmēt atsevišķi visas galvenās palīglīnijas un mazās palīglīnijas, attiecīgi ar argumentiem `panel.grid.major = ` un `panel.grid.minor = `. Var ietekmē arī atsevišķi šīs palīglīnijas attiecībā pret x un y ass ar argumentiem kā `panel.grid.major.x = ` (\@ref(fig:thpal2) attēls).
+
+```{r thpal2, fig.cap="Attēls ar izmainītām palīglīnijām"}
+ggplot(CO2,aes(conc,uptake, color = Type)) + geom_point() + 
+      theme(panel.grid.major.x = element_line(colour = "lightblue"),
+            panel.grid.major.y = element_line(linetype = "dashed",
+                                              size = 2))
+```
+
+### Attēla daļu virsraksti
+
+Tiem attēliem, kas ir sadalīti daļā izmantot `facet_...()` funkcijas, atsevišķu attēlu nosaukumu tekstu pamatnes maina ar elementu `strip.background = `, bet pašu tekstu izskatu ar `strip.text = ` (visus kopā), vai arī ar argumentiem `strip.text.x = ` (horizontālie nosaukumi) un `strip.text.y = ` (vertikālie nosaukumi) (\@ref(fig:thfan1) attēls).
+
+```{r thfan1, fig.cap="Sadalīts attēls ar mainītiem nosaukumu noformējumiem"}
+ggplot(CO2, aes(conc, uptake)) + geom_point() + 
+      facet_grid(Treatment ~ Type) +
+      theme(strip.background = element_rect(colour = "black", fill = NA),
+            strip.text.x = element_text(face = "italic"),
+            strip.text.y = element_text(face = "bold"))
+```
+### Visa attēla pamatne
+
+Visa kopējā attēla pamatnes (fona) noteikšanai izmanto argumentu `plot.background = ` (\@ref(fig:thplo1) attēls).
+
+```{r thplo1, fig.cap="Attēls ar mainītu pamatnes krāsu"}
+ggplot(CO2, aes(conc, uptake, color = Type)) + geom_point() + 
+      theme(plot.background = element_rect(fill = "lightgreen"))
+```
+
+Visam attēlam var mainīt arī malas izmērus, kas tas atrodas apkārt. To nosaka ar argumentu `plot.margin = ` un funkcijā `unit()` norādot četrus skaitļus, kas atbilst attiecīgi augšejai, labajai, apakšējai un kreisajai malai (\@ref(fig:thplo2) attēls).
+
+```{r thplo2, fig.cap="Attēls ar mainītiem malas izmēriem"}
+ggplot(CO2, aes(conc, uptake, color = Type)) + geom_point() + 
+      theme(plot.margin = unit(c(2,2,3,3), "cm"))
 ```
