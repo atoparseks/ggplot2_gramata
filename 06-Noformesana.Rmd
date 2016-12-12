@@ -45,3 +45,87 @@ ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() +
 ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
       theme_void()
 ```
+
+
+## Atsevišķu attēla elementu mainīšana
+
+Papildus jau definētajām attēla noformējuma tēmām, ir iespējams mainīt gandrīz katru no attēla elementiem atsevišķi, izmantojot funkciju `theme()` un atbilstošo elementa nosaukumu. Pilnu sarakstu ar elementu nosaukumiem var iegūt apskatot funkcijas `theme()` palīdzības lapu. 
+
+Elementu izskatu maiņa notiek pēc vienota principa - sākotnēji ir funkcija `theme()`, kurā kā arguments jānorāda maināmais elements, piemēram, `axis.text.x =` un tad nāk funkcija, kas norāda kāda izmaiņas veikt. Ir pieejamas trīs funkcijas `element_text()`, `element_line()` un `element_rect()`, kuras ir jāizraugas atbilstoši tam, kāda veida maināmais elements tas ir - teksts, līnija vai reģions (poligons). Katra elementa maiņa nav jāraksta savā `theme()` funkcijā, bet tie var būt vairāki argumenti vienā funkcijā.
+
+Teksta elementiem (`element_text()`) var mainīt teksta fontu grupu (`family = `), fonta veida (`face = `), krāsu (`colour = `), izmēru (`size = `), novietojumu horizentāli (`hjust = `) un vertikāli (`vjust = `), teksta leņķi (`angle = `), līnijas augstumu (`lineheight = `), atstarpes (`margin = `).
+
+Līniju elementiem (`element_line()`) var mainīt krāsu (`colour = `), līnijas biezumu (`size = `), līnijas veidu (`linetype = `), līnijas nobeigumu (`lineend = `) un pievienot bultu (`arrow = `).
+
+Reģiona jeb poligona elementiem (`element_rect()`) var mainīt aizpildījumu (`fill = `), krāsu līnijai apkārt reģionam (`colour = `), līnijas biezumu (`size = `) un līnijas veidu (`linetype = `).
+
+Ir pieejama arī speciāla funkcija `element_blank()`, kas no attēla noņems atbilstošo elementu, turklāt "pazudīs" arī šim elementam atvēlētā vieta, ja tas būs, piemēram, asu paraksts, vai asu apzīmējumi.
+
+### Attēla virsraksts
+
+Attēla virsraksta izskatu (bet ne tā saturu) maina ar argumentu `plot.title =`. 
+
+Pirmajā piemēra teksta virsraksts pārveidots zaļā krāsā, 20 fonta izmērā un slīprakstā (\@ref(fig:thvir1) attēls).
+
+```{r thvir1,fig.cap="Attēls ar mainītu virsraksta izskatu"}
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      labs(title = "CO2 attēls")+
+      theme(plot.title = element_text(colour = "green",
+                                      size = 20,
+                                      face = "italic"))
+```
+
+Jaunākajā ggplot2 verijā (2.2.0) virsraksts automātiski ir novietots attēla kreisajā pusē, to var izmainīt ar argumentu `hjust = ` un vērtību 0.5 (0 - kreisā mala, 1 - labā mala, 0.5 - pa vidu) (\@ref(fig:thvir2) attēls). 
+
+```{r thvir2,fig.cap="Attēls ar mainītu virsraksta novietojumu"}
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      labs(title = "CO2 attēls")+
+      theme(plot.title = element_text(hjust = 0.5))
+```
+
+### Asu paraksti
+
+Asu parakstu maiņa notiek ar elementu `axis.title = ` (abas asis vienlaicīgi), vai `axis.title.x = ` un `axis.title.y = ` mainot katras ass izskatu atsevišķi. 
+
+Asu paraksti arī ir teksts, tāpēc izmantojama funkcija `element_text()` (\@ref(fig:thasp1) attēls).
+
+```{r thasp1,fig.cap="Attēls ar vienādu asu parakstu noformējumu"}
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme(axis.title = element_text(size = 15,
+                                      face = "bold"))
+```
+
+Izmantojot argumentus `axis.title.x = ` un `axis.title.y =` var mainīt katru asi atsevišķi, piemēram, vienais asij noņemot parakstu, bet otrai to izmainot (\@ref(fig:thasp2) attēls).
+
+```{r thasp2,fig.cap="Attēls ar x asi bez paraksta"}
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme(axis.title.x = element_blank(),
+            axis.title.y = element_text(colour = "red"))
+```
+
+### Asu apzīmējumi
+
+Apzīmējumus pie asīm (skaitļus vai līmeņu nosaukumus) maina ar argumentiem `axis.text = `, `axis.text.x = `, vai `axis.text.y = ` (\@ref(fig:thasa1) attēls).  
+
+
+```{r thasa1,fig.cap="Attēls ar mainītiem asu apzīmējumiem"}
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme(axis.text.x = element_text(angle = 45, hjust = 1),
+            axis.text.y = element_text(angle = 90, hjust = 0.5))
+```
+
+### Asu līnijas
+
+Pēc noklusējuma vairākām tēmām nerādās asu līnijas. Tās var pievienot ar argumentu `axis.line = `, vai `axis.line.x = ` un `axis.line.y = `. Tā kā tās ir līnijas, tad to izskata maiņai izmanto funkciju `element_line()` (\@ref(fig:thasl1) attēls).
+
+```{r thasl1,fig.cap="Attēls ar asu līnijām"}
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme(axis.line = element_line(linetype = "longdash"))
+```
+
+Asu līniju galos ir iespējams arī pievienot bultiņu ar argumentu `arrow =` un funkciju `arrow()` (\@ref(fig:thasl2) attēls).
+
+```{r thasl2,fig.cap="Attēls ar bultiņām pie asīm"}
+ggplot(CO2,aes(conc,uptake,color=Type)) + geom_point() + 
+      theme(axis.line = element_line(arrow = arrow(length = unit(2, 'mm'))))
+```
