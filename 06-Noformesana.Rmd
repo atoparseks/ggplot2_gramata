@@ -141,14 +141,14 @@ ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() +
 
 ### Leģendas novietojums
 
-Leģendas novietojuma nosaka ar argumentu `legend.position = ` un iespējamāma vērtībām `"none"`, `"left"`, `"right"`, `"bottom"` un `"top"` (\@ref(fig:thlen1) attēls).
+Leģendas novietojuma nosaka ar argumentu `legend.position = ` un iespējamām vērtībām `"none"`, `"left"`, `"right"`, `"bottom"` un `"top"` (\@ref(fig:thlen1) attēls).
 
 ```{r thlen1,fig.cap="Attēls ar leģendu apakšā"}
 ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
       theme(legend.position = "bottom")
 ```
 
-Ja nepieciešams novietot leģendu attēla iekšienē, tad jānora reletīvās x un y koordinātes, kur `c(0,0)` atbilst attēla apakšējam kreisajam stūrim un `c(1,1)` attēla augšējam labajam stūrim (\@ref(fig:thlen2) attēls).
+Ja nepieciešams novietot leģendu attēla iekšienē, tad jānorāda reletīvās x un y koordinātes, kur `c(0,0)` atbilst attēla apakšējam kreisajam stūrim un `c(1,1)` attēla augšējam labajam stūrim (\@ref(fig:thlen2) attēls).
 
 ```{r thlen2, fig.cap="Attēls ar leģendu attēla iekšienē"}
 ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
@@ -163,7 +163,7 @@ ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() +
             legend.direction = "vertical")
 ```
 
-Leģendas novietojumu var ietekmē arī mainot atstarpi starp leģendu un pamatattēlu ar argumentu `legend.box.spacing = ` un funkciju `unit()`, kurā norāda vēlamo atstarpes izmēru un mērvienību  (\@ref(fig:thlen4) attēls).
+Leģendas novietojumu var ietekmēt arī mainot atstarpi starp leģendu un pamatattēlu ar argumentu `legend.box.spacing = ` un funkciju `unit()`, kurā norāda vēlamo atstarpes izmēru un mērvienību  (\@ref(fig:thlen4) attēls).
 
 ```{r thlen4,fig.cap="Attēls ar tālāk novietotu leģendu"}
 ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 
@@ -214,7 +214,7 @@ ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() +
 
 ### Leģendas ieraksti
 
-Pašu leģendas ierakstu, kuros parādas, piemēram, krāsu līmeņi vai simbolu veidi, mainīšanai ir pieejams parametrs `legend.key = `, kas maina ieraksta pamatnes izskatu  (\@ref(fig:thlez1) attēls).
+Pašu leģendas ierakstu, kuros parādās, piemēram, krāsu līmeņi vai simbolu veidi, mainīšanai ir pieejams parametrs `legend.key = `, kas maina ieraksta pamatnes izskatu  (\@ref(fig:thlez1) attēls).
 
 ```{r thlez1, fig.cap="Attēls ar mainītu leģendu ieraksta pamatni"}
 ggplot(CO2,aes(conc,uptake,color = Type)) + geom_point() + 

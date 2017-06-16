@@ -306,13 +306,13 @@ ggplot(CO2,aes(conc,uptake)) + geom_point() +
 
 ## geom_violin()
 
-Īpašs datu attēlošanas veids ir `geom_violin()`, kas sevī apvieno gan vērtībaplitūdas īpašības, gan arī blīvuma attēla īpašības. Pēc būtības tas ir blīvuma attēls, kurā vērtību blīvuma funkcijas attēlojums dots spoguļattēlā  (\@ref(fig:viol1) attēls).
+Īpašs datu attēlošanas veids ir `geom_violin()`, kas sevī apvieno gan vērtībamplitūdas īpašības, gan arī blīvuma attēla īpašības. Pēc būtības tas ir blīvuma attēls, kurā vērtību blīvuma funkcijas attēlojums dots spoguļattēlā  (\@ref(fig:viol1) attēls).
 
 ```{r viol1,fig.cap="geom_violin() attēls"}
 ggplot(CO2,aes(Type,uptake)) + geom_violin()
 ```
 
-Ar argumentu `draw_quantiles = ` attēlu var papildināt ar kvartiļu pozīcijām (\@ref(fig:viol2) attēls).
+Ar argumentu `draw_quantiles = ` attēlu var papildināt ar kvantiļu pozīcijām (\@ref(fig:viol2) attēls).
 
 ```{r viol2,fig.cap="geom_violin() attēls ar pievienotām kvartilēm"}
 ggplot(CO2,aes(Type,uptake)) + 

@@ -105,7 +105,7 @@ ggplot(CO2, aes(conc, uptake, colour = uptake)) + geom_point() +
       scale_colour_gradient(low="white",high = "black")
 ```
 
-Norādot divas ļoti atšķirīgas krāsas, veidosies pārēja no vienas krāsas uz otru krāsu ar balto pa vidu. Pēc noklusējuma baltā krāsa atbildīs vērtībām 0, bet, ja nepieciešams cits viduspunkts, tas jānorāda ar argumentu `midpoint = ` (\@ref(fig:scol6) attēls).
+Norādot divas ļoti atšķirīgas krāsas, veidosies pāreja no vienas krāsas uz otru krāsu ar balto pa vidu. Pēc noklusējuma baltā krāsa atbildīs vērtībām 0, bet, ja nepieciešams cits viduspunkts, tas jānorāda ar argumentu `midpoint = ` (\@ref(fig:scol6) attēls).
 
 ```{r scol6,fig.cap="Izkliedes attēls, kurā krāsa mainās kā gradients no sarkanās uz zilo"}
 ggplot(CO2, aes(conc, uptake, colour = uptake)) + geom_point() +
